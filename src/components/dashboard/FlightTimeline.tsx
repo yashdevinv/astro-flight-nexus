@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Clock, Rocket, Parachute, MapPin } from 'lucide-react';
+import { Clock, Rocket, Umbrella, MapPin } from 'lucide-react';
 
 interface FlightTimelineProps {
   phase: string;
@@ -12,8 +12,8 @@ export const FlightTimeline: React.FC<FlightTimelineProps> = ({ phase, timestamp
     { name: 'Pre-Launch', icon: Clock, completed: true },
     { name: 'Ascent', icon: Rocket, completed: ['Ascent', 'Apogee', 'Drogue Deployed', 'Main Deployed', 'Landed'].includes(phase) },
     { name: 'Apogee', icon: Rocket, completed: ['Apogee', 'Drogue Deployed', 'Main Deployed', 'Landed'].includes(phase) },
-    { name: 'Drogue Deployed', icon: Parachute, completed: ['Drogue Deployed', 'Main Deployed', 'Landed'].includes(phase) },
-    { name: 'Main Deployed', icon: Parachute, completed: ['Main Deployed', 'Landed'].includes(phase) },
+    { name: 'Drogue Deployed', icon: Umbrella, completed: ['Drogue Deployed', 'Main Deployed', 'Landed'].includes(phase) },
+    { name: 'Main Deployed', icon: Umbrella, completed: ['Main Deployed', 'Landed'].includes(phase) },
     { name: 'Landed', icon: MapPin, completed: phase === 'Landed' }
   ];
 
