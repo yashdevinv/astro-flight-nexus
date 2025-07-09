@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { LiveOrientationDisplay } from './dashboard/LiveOrientationDisplay';
 import { AltitudeOverview } from './dashboard/AltitudeOverview';
 import { GPSTracking } from './dashboard/GPSTracking';
@@ -14,6 +14,8 @@ import { useTelemetryData } from '@/hooks/useTelemetryData';
 export const GroundStationDashboard = () => {
   const { telemetryData, connectionStatus, logs } = useTelemetryData();
   const [graphExpanded, setGraphExpanded] = useState(true);
+
+  console.log('Dashboard rendering with telemetry:', telemetryData);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-white overflow-hidden">

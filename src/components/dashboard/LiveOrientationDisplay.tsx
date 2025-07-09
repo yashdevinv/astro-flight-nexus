@@ -1,7 +1,7 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Box, Cylinder } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface OrientationProps {
@@ -24,28 +24,34 @@ const RocketModel: React.FC<OrientationProps> = ({ pitch, yaw, roll }) => {
   return (
     <group ref={rocketRef}>
       {/* Rocket Body */}
-      <Cylinder args={[0.3, 0.3, 4, 8]} position={[0, 0, 0]}>
+      <mesh position={[0, 0, 0]}>
+        <cylinderGeometry args={[0.3, 0.3, 4, 8]} />
         <meshStandardMaterial color="#e11d48" />
-      </Cylinder>
+      </mesh>
       
       {/* Nose Cone */}
-      <Cylinder args={[0, 0.3, 1, 8]} position={[0, 2.5, 0]}>
+      <mesh position={[0, 2.5, 0]}>
+        <cylinderGeometry args={[0, 0.3, 1, 8]} />
         <meshStandardMaterial color="#dc2626" />
-      </Cylinder>
+      </mesh>
       
       {/* Fins */}
-      <Box args={[0.1, 1, 0.5]} position={[0.4, -1.5, 0]}>
+      <mesh position={[0.4, -1.5, 0]}>
+        <boxGeometry args={[0.1, 1, 0.5]} />
         <meshStandardMaterial color="#1e40af" />
-      </Box>
-      <Box args={[0.1, 1, 0.5]} position={[-0.4, -1.5, 0]}>
+      </mesh>
+      <mesh position={[-0.4, -1.5, 0]}>
+        <boxGeometry args={[0.1, 1, 0.5]} />
         <meshStandardMaterial color="#1e40af" />
-      </Box>
-      <Box args={[0.5, 1, 0.1]} position={[0, -1.5, 0.4]}>
+      </mesh>
+      <mesh position={[0, -1.5, 0.4]}>
+        <boxGeometry args={[0.5, 1, 0.1]} />
         <meshStandardMaterial color="#1e40af" />
-      </Box>
-      <Box args={[0.5, 1, 0.1]} position={[0, -1.5, -0.4]}>
+      </mesh>
+      <mesh position={[0, -1.5, -0.4]}>
+        <boxGeometry args={[0.5, 1, 0.1]} />
         <meshStandardMaterial color="#1e40af" />
-      </Box>
+      </mesh>
     </group>
   );
 };
