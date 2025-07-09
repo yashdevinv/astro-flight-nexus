@@ -20,29 +20,29 @@ export const GroundStationDashboard = () => {
   console.log('Dashboard rendering with telemetry:', telemetryData);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-white overflow-hidden">
-      {/* Header */}
-      <header className="border-b border-cyan-500/30 bg-black/50 backdrop-blur-sm">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-orange-950/20 to-green-900/30 text-white overflow-auto">
+      {/* Header - Fixed positioning */}
+      <header className="sticky top-0 z-50 border-b border-orange-400/40 bg-slate-900/95 backdrop-blur-md shadow-lg">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">🚀</span>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-lg">🚀</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-orange-400 via-white to-green-400 bg-clip-text text-transparent">
                     MISSION CONTROL
                   </h1>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-400">Latin American Space Cup 2025 •</span>
-                    <span className="text-sm font-bold text-orange-400" style={{fontFamily: 'Samarkan, serif'}}>
+                  <div className="flex items-center space-x-3">
+                    <span className="text-sm text-slate-300">Latin American Space Cup 2025 •</span>
+                    <span className="text-lg font-bold text-orange-400" style={{fontFamily: 'Samarkan, serif'}}>
                       STES Rocketry
                     </span>
-                    <div className="w-6 h-4 bg-gradient-to-b from-orange-500 via-white to-green-500 rounded-sm flex items-center justify-center relative">
+                    <div className="w-8 h-5 bg-gradient-to-b from-orange-500 via-white to-green-500 rounded-sm flex items-center justify-center relative shadow-md border border-slate-600">
                       <div className="absolute inset-0 bg-gradient-to-b from-orange-500 via-white to-green-500 rounded-sm"></div>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-3 h-3 rounded-full bg-blue-800 flex items-center justify-center">
+                        <div className="w-4 h-4 rounded-full bg-blue-800 flex items-center justify-center">
                           <div className="w-2 h-2 rounded-full bg-white"></div>
                         </div>
                       </div>
@@ -56,8 +56,8 @@ export const GroundStationDashboard = () => {
         </div>
       </header>
 
-      {/* Main Dashboard Grid */}
-      <div className="p-6 grid grid-cols-12 gap-6 h-[calc(100vh-100px)]">
+      {/* Main Dashboard Grid - Proper spacing from header */}
+      <div className="p-6 pt-8 grid grid-cols-12 gap-6 min-h-[calc(100vh-120px)]">
         {/* Left Column - 3D Orientation & Environmental */}
         <div className="col-span-3 space-y-6">
           <LiveOrientationDisplay orientation={telemetryData.orientation} />
@@ -66,7 +66,7 @@ export const GroundStationDashboard = () => {
 
         {/* Center Column - Altitude, GPS & Trajectory */}
         <div className="col-span-6 space-y-6">
-          <div className="grid grid-cols-2 gap-6 h-2/5">
+          <div className="grid grid-cols-2 gap-6 h-80">
             <AltitudeOverview 
               altitude={telemetryData.altitude}
               velocity={telemetryData.velocity}
@@ -76,12 +76,12 @@ export const GroundStationDashboard = () => {
           </div>
           
           {/* Trajectory Visualization */}
-          <div className="h-1/5">
+          <div className="h-64">
             <TrajectoryVisualization telemetryData={telemetryData} />
           </div>
           
           {/* Expandable Graph Panel */}
-          <div className={`transition-all duration-300 ${graphExpanded ? 'h-2/5' : 'h-16'}`}>
+          <div className={`transition-all duration-300 ${graphExpanded ? 'h-80' : 'h-16'}`}>
             <GraphPanel 
               expanded={graphExpanded}
               onToggle={() => setGraphExpanded(!graphExpanded)}
@@ -100,6 +100,15 @@ export const GroundStationDashboard = () => {
 
       {/* Alert System Overlay */}
       <AlertSystem telemetryData={telemetryData} />
+      
+      {/* Subtle Indian Pattern Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, orange 1px, transparent 1px),
+                           radial-gradient(circle at 75% 75%, green 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
     </div>
   );
 };
