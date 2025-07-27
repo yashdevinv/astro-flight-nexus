@@ -69,23 +69,27 @@ export const GroundStationDashboard = () => {
         </div>
 
         {/* Center Column - Altitude, GPS & Trajectory */}
-        <div className="col-span-6 space-y-4">
-          <div className="grid grid-cols-2 gap-4 h-[350px]">
-            <AltitudeOverview 
-              altitude={telemetryData.altitude}
-              velocity={telemetryData.velocity}
-              flightPhase={telemetryData.flight_phase}
-            />
-            <GPSTracking gps={telemetryData.gps} trajectory={telemetryData.trajectory} />
+        <div className="col-span-6 space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <div className="h-[320px]">
+              <AltitudeOverview 
+                altitude={telemetryData.altitude}
+                velocity={telemetryData.velocity}
+                flightPhase={telemetryData.flight_phase}
+              />
+            </div>
+            <div className="h-[320px]">
+              <GPSTracking gps={telemetryData.gps} trajectory={telemetryData.trajectory} />
+            </div>
           </div>
           
           {/* Trajectory Visualization */}
-          <div className="h-[280px]">
+          <div className="h-[240px]">
             <TrajectoryVisualization telemetryData={telemetryData} />
           </div>
           
           {/* Expandable Graph Panel */}
-          <div className={`transition-all duration-300 ${graphExpanded ? 'h-[400px]' : 'h-16'}`}>
+          <div className={`transition-all duration-300 ${graphExpanded ? 'h-[350px]' : 'h-16'}`}>
             <GraphPanel 
               expanded={graphExpanded}
               onToggle={() => setGraphExpanded(!graphExpanded)}
