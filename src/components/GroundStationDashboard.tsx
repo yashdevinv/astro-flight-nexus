@@ -53,51 +53,51 @@ export const GroundStationDashboard = () => {
         </div>
       </header>
 
-      {/* Main Dashboard - Fixed Layout */}
-      <div className="p-8 overflow-hidden">
-        <div className="max-w-full">
+      {/* Main Dashboard - Responsive Layout with Proper Overflow */}
+      <div className="p-8">
+        <div className="space-y-6">
           {/* Top Row - Altitude and GPS */}
-          <div className="grid grid-cols-12 gap-6 mb-6">
+          <div className="grid grid-cols-12 gap-6">
             <div className="col-span-3">
-              <div className="h-[380px] overflow-hidden">
+              <div className="h-fit min-h-[380px]">
                 <LiveOrientationDisplay orientation={telemetryData.orientation} />
               </div>
             </div>
             <div className="col-span-6">
-              <div className="grid grid-cols-2 gap-6 h-[380px]">
-                <div className="overflow-hidden">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="h-fit min-h-[380px]">
                   <AltitudeOverview 
                     altitude={telemetryData.altitude}
                     velocity={telemetryData.velocity}
                     flightPhase={telemetryData.flight_phase}
                   />
                 </div>
-                <div className="overflow-hidden">
+                <div className="h-fit min-h-[380px]">
                   <GPSTracking gps={telemetryData.gps} trajectory={telemetryData.trajectory} />
                 </div>
               </div>
             </div>
             <div className="col-span-3">
-              <div className="h-[380px] overflow-hidden">
+              <div className="h-fit min-h-[380px]">
                 <FlightTimeline phase={telemetryData.flight_phase} timestamp={telemetryData.timestamp} />
               </div>
             </div>
           </div>
 
           {/* Middle Row - Environmental and Trajectory */}
-          <div className="grid grid-cols-12 gap-6 mb-6">
+          <div className="grid grid-cols-12 gap-6">
             <div className="col-span-3">
-              <div className="h-[340px] overflow-hidden">
+              <div className="h-fit min-h-[320px]">
                 <EnvironmentalData telemetryData={telemetryData} />
               </div>
             </div>
             <div className="col-span-6">
-              <div className="h-[340px] overflow-hidden">
+              <div className="h-fit min-h-[320px]">
                 <TrajectoryVisualization telemetryData={telemetryData} />
               </div>
             </div>
             <div className="col-span-3">
-              <div className="h-[340px] overflow-hidden">
+              <div className="h-fit min-h-[320px]">
                 <TelemetryPanel data={telemetryData} />
               </div>
             </div>
@@ -106,7 +106,7 @@ export const GroundStationDashboard = () => {
           {/* Bottom Row - Graph and System Log */}
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-9">
-              <div className={`transition-all duration-300 overflow-hidden ${graphExpanded ? 'h-[400px]' : 'h-16'}`}>
+              <div className={`transition-all duration-300 ${graphExpanded ? 'h-fit min-h-[400px]' : 'h-16'}`}>
                 <GraphPanel 
                   expanded={graphExpanded}
                   onToggle={() => setGraphExpanded(!graphExpanded)}
@@ -115,7 +115,7 @@ export const GroundStationDashboard = () => {
               </div>
             </div>
             <div className="col-span-3">
-              <div className="h-[400px] overflow-hidden">
+              <div className="h-fit min-h-[400px] max-h-[600px] overflow-y-auto">
                 <SystemLog logs={logs} />
               </div>
             </div>
