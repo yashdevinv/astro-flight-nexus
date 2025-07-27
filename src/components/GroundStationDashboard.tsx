@@ -57,57 +57,59 @@ export const GroundStationDashboard = () => {
       </header>
 
       {/* Main Dashboard Grid - Proper spacing from header */}
-      <div className="p-6 pt-8 grid grid-cols-12 gap-4 min-h-[calc(100vh-120px)]">
-        {/* Left Column - 3D Orientation & Environmental */}
-        <div className="col-span-3 space-y-4">
-          <div className="h-[350px]">
-            <LiveOrientationDisplay orientation={telemetryData.orientation} />
+      <div className="p-6 pt-8">
+        <div className="grid grid-cols-12 gap-6">
+          {/* Left Column - 3D Orientation & Environmental */}
+          <div className="col-span-3 space-y-6">
+            <div className="h-[350px]">
+              <LiveOrientationDisplay orientation={telemetryData.orientation} />
+            </div>
+            <div className="h-[300px]">
+              <EnvironmentalData telemetryData={telemetryData} />
+            </div>
           </div>
-          <div className="h-[300px]">
-            <EnvironmentalData telemetryData={telemetryData} />
-          </div>
-        </div>
 
-        {/* Center Column - Altitude, GPS & Trajectory */}
-        <div className="col-span-6 space-y-6">
-          <div className="grid grid-cols-2 gap-6">
-            <div className="h-[320px]">
-              <AltitudeOverview 
-                altitude={telemetryData.altitude}
-                velocity={telemetryData.velocity}
-                flightPhase={telemetryData.flight_phase}
+          {/* Center Column - Altitude, GPS & Trajectory */}
+          <div className="col-span-6 space-y-6">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="h-[320px]">
+                <AltitudeOverview 
+                  altitude={telemetryData.altitude}
+                  velocity={telemetryData.velocity}
+                  flightPhase={telemetryData.flight_phase}
+                />
+              </div>
+              <div className="h-[320px]">
+                <GPSTracking gps={telemetryData.gps} trajectory={telemetryData.trajectory} />
+              </div>
+            </div>
+            
+            {/* Trajectory Visualization */}
+            <div className="h-[250px]">
+              <TrajectoryVisualization telemetryData={telemetryData} />
+            </div>
+            
+            {/* Expandable Graph Panel */}
+            <div className={`transition-all duration-300 ${graphExpanded ? 'h-[350px]' : 'h-16'}`}>
+              <GraphPanel 
+                expanded={graphExpanded}
+                onToggle={() => setGraphExpanded(!graphExpanded)}
+                telemetryData={telemetryData}
               />
             </div>
-            <div className="h-[320px]">
-              <GPSTracking gps={telemetryData.gps} trajectory={telemetryData.trajectory} />
-            </div>
           </div>
-          
-          {/* Trajectory Visualization */}
-          <div className="h-[240px]">
-            <TrajectoryVisualization telemetryData={telemetryData} />
-          </div>
-          
-          {/* Expandable Graph Panel */}
-          <div className={`transition-all duration-300 ${graphExpanded ? 'h-[350px]' : 'h-16'}`}>
-            <GraphPanel 
-              expanded={graphExpanded}
-              onToggle={() => setGraphExpanded(!graphExpanded)}
-              telemetryData={telemetryData}
-            />
-          </div>
-        </div>
 
-        {/* Right Column - Timeline, Telemetry & Logs */}
-        <div className="col-span-3 space-y-4">
-          <div className="h-[250px]">
-            <FlightTimeline phase={telemetryData.flight_phase} timestamp={telemetryData.timestamp} />
-          </div>
-          <div className="h-[200px]">
-            <TelemetryPanel data={telemetryData} />
-          </div>
-          <div className="h-[300px]">
-            <SystemLog logs={logs} />
+          {/* Right Column - Timeline, Telemetry & Logs */}
+          <div className="col-span-3 space-y-6">
+            <div className="h-[250px]">
+              <FlightTimeline phase={telemetryData.flight_phase} timestamp={telemetryData.timestamp} />
+            </div>
+            <div className="h-[220px]">
+              <TelemetryPanel data={telemetryData} />
+            </div>
+            <div className="h-[320px]">
+              <SystemLog logs={logs} />
+            </div>
           </div>
         </div>
       </div>
