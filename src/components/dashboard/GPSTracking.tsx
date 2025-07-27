@@ -122,8 +122,14 @@ export const GPSTracking: React.FC<GPSTrackingProps> = ({ gps, trajectory }) => 
         
         {/* GPS Quality Indicators */}
         <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-400">Satellites</span>
-          <span className="text-sm font-mono text-green-400">12/12</span>
+          <span className="text-sm text-gray-400 flex items-center">
+            <Satellite className="w-3 h-3 mr-1" />
+            GPS Fix
+          </span>
+          <span className="text-sm font-mono text-green-400 flex items-center">
+            <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+            12 SAT
+          </span>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-sm text-gray-400">HDOP</span>
